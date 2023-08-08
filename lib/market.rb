@@ -1,3 +1,5 @@
+require 'date'
+
 class Market
   attr_reader :name, :vendors
 
@@ -40,8 +42,7 @@ class Market
 
   def overstocked_items
     overstock = []
-    inventory = total_inventory
-    inventory.each do |item, item_hash|
+    total_inventory.each do |item, item_hash|
       if item_hash[:quantity] > 50 && item_hash[:vendors].count > 1
         overstock << item
       end
@@ -49,4 +50,17 @@ class Market
     overstock
   end
 
+  def sell(item, sell_count)
+    return false if total_inventory[item][:quantity] < sell_count
+    sellers = vendors_that_sell(item)
+    sellers.each do |vendor|
+      if vendor.check_stock(item) <= sell_count
+        sell_count -= vendor.check_stock(item)
+        vendor.inventory[item] = 0
+      else
+        vendor.inventory[item] -= sell_count
+      end
+    end
+    true
+  end
 end

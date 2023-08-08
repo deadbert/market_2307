@@ -1,6 +1,7 @@
 require './lib/item'
 require './lib/vendor'
 require './lib/market'
+require 'date'
 
 describe Market do
   before :each do
@@ -87,6 +88,20 @@ describe Market do
   describe "#overstocked_items" do
     it "returns arroy of Item objects that are sold by more than 1 vendor AND total stock is greater than 50" do
       expect(market.overstocked_items).to eq([item1])
+    end
+  end
+
+  describe "#sell" do
+    it "Sells items from Market, starting form first vendor to stock an item, returns false if not enough quantity to satisfy order" do
+      expect(market.sell(item4, 500)).to eq(false)
+
+      expect(market.sell(item1, 90)).to eq(true)
+      expect(vendor1.check_stock(item1)).to eq(0)
+      expect(vendor3.check_stock(item1)).to eq(10)
+      
+      vendor3.stock(item2, 1)
+      expect(market.sell(item2, 7)).to eq(true)
+      expect(vendor3.check_stock(item2)).to eq(1)
     end
   end
 end
