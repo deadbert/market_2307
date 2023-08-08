@@ -104,4 +104,14 @@ describe Market do
       expect(vendor3.check_stock(item2)).to eq(1)
     end
   end
+
+  describe "#date" do
+    it "returns date market was created as a string dd/mm/yy" do
+      date = double('10/12/1988')
+      market2 = Market.new("bob's place", date)
+      allow(market2).to receive(:date).and_return(date)
+
+      expect(market2.date).to eq(date)
+    end
+  end
 end
