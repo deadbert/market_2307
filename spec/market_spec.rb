@@ -13,7 +13,7 @@ describe Market do
     end
 
     it "initializes with empty array of vendors" do
-      expect(market.vendros).to eq([])
+      expect(market.vendors).to eq([])
     end
   end
 end
