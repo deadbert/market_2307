@@ -27,4 +27,15 @@ class Market
     items.map { |item| item.name }.sort
   end
 
+  def total_inventory
+    total_inventory = Hash.new
+    @vendors.flat_map { |vendor| vendor.inventory.keys}.uniq.each do |item|
+      item_hash = Hash.new
+      item_quantity = vendors_that_sell(item).sum { |vendor| vendor.check_stock(item)}
+      item_vendors = vendors_that_sell(item)
+      total_inventory[item] = {quantity: item_quantity, vendors: item_vendors}
+    end
+    total_inventory
+  end
+
 end
