@@ -66,6 +66,6 @@ class Market
   end
 
   def date
-    @data.strftime('%m/%d/%Y')
+    @date.strftime('%m/%d/%Y')
   end
 end

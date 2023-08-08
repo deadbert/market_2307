@@ -108,10 +108,10 @@ describe Market do
   describe "#date" do
     it "returns date market was created as a string dd/mm/yy" do
       date = double('10/12/1988')
+      allow(date).to receive(:strftime).and_return('10/12/1988')
       market2 = Market.new("bob's place", date)
-      allow(market2).to receive(:date).and_return(date)
 
-      expect(market2.date).to eq(date)
+      expect(market2.date).to eq('10/12/1988')
     end
   end
 end
