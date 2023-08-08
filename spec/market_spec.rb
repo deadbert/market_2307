@@ -51,7 +51,12 @@ describe Market do
     it "returns array of vendors that sell the requested item" do
       expect(market.vendors_that_sell(item1)).to eq([vendor1, vendor3])
       expect(market.vendors_that_sell(item4)).to eq([vendor2])
-      require 'pry';binding.pry
+    end
+  end
+
+  describe "#sorted_item_list" do
+    it "returns array of names of all items vendors have in stock, sorted alphabetically with no duplicates" do
+      expect(market.sorted_item_list).to eq(["Banana Nice Cream", "Peach", "Peach-Raspberry Nice Cream", "Tomato"])
     end
   end
 end
