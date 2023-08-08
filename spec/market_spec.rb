@@ -59,4 +59,28 @@ describe Market do
       expect(market.sorted_item_list).to eq(["Banana Nice Cream", "Peach", "Peach-Raspberry Nice Cream", "Tomato"])
     end
   end
+
+  describe "#total_inventory" do
+    it "returns hash with items as keys with hash value that stores {quantity: item_total, vendors: [selling vendors]}" do
+      expected = {
+        item1: {
+          quantity: 100
+          vendors: [vendor1, vendor3]
+        }
+        item2: {
+          quantity: 7
+          vendors: [vendor1]
+        }
+        item3: {
+          quantity: 25
+          vendors: [vendor2]
+        }
+        item4: {
+          quantity: 50
+          vendors: [vendor2]
+        }
+      }
+      expect(market.total_inventory).to eq(expected)
+    end
+  end
 end
