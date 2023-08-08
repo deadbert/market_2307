@@ -9,4 +9,8 @@ class Vendor
   def check_stock(item)
     @inventory[item]
   end
+
+  def stock(item, count)
+    count.times { @inventory[item] += 1}
+  end
 end
