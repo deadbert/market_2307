@@ -46,4 +46,12 @@ describe Market do
       expect(market.vendor_names).to eq(["Rocky Mountain Fresh", "Ba-Nom-a-Nom", "Palisade Peach Shack"])
     end
   end
+
+  describe "#vendors_that_sell" do
+    it "returns array of vendors that sell the requested item" do
+      expect(market.vendors_that_sell(item1)).to eq([vendor1, vendor3])
+      expect(market.vendors_that_sell(item4)).to eq([vendor2])
+      require 'pry';binding.pry
+    end
+  end
 end
