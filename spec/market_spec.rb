@@ -83,4 +83,10 @@ describe Market do
       expect(market.total_inventory).to eq(expected)
     end
   end
+
+  describe "#overstocked_items" do
+    it "returns arroy of Item objects that are sold by more than 1 vendor AND total stock is greater than 50" do
+      expect(market.overstocked_items).to eq([item1])
+    end
+  end
 end
